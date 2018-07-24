@@ -15,76 +15,70 @@ Spring
  
 Angular para WebApps RESTful
 ---
-•	Construindo o alicerce da aplicação 
-o	Angular, o framework MVC da Google
-o	Angular 5 e o novo paradigma
-o	Instalando o Node
-o	Iniciando o projeto com Angular
-o	Entendendo a estrutura do projeto: o componente principal
-o	Nomeando a App e imagens estáticas
-o	Adicionando CSS no projeto
-o	Criando componentes para as fotos
-o	Parâmetros
-o	Lacunas em templates e data binding
-o	Consumindo uma API
-o	HTTP e injeção de dependências
-o	TypeScript e definição de tipos estáticos
-o	Configurando o servidor HTTP do Angular
-o	Chamada API remota
-o	Conectando com API
-o	Diretiva ngFor
-o	Lista de Fotos
-o	PainelComponent
-o	Página de cadastro de fotos
-o	Single Page Application (SPA)
-o	Configurando rotas
-o	Redirecionar caminhos inexistentes
-o	Links para rotas
-o	Pipes
-o	Variáveis locais
-o	Criando um pipe
-o	Interface type
-o	Implementando uma interface
-o	Definir tipos para usar autocomplete
-o	Pipe, implementando a lógica
-o	Event binding para atualizar a view
-o	Filtros
-o	Cadastrando novas imagens
-o	Data-binding
-o	One-way data-binding
-o	Associação de eventos (data-binding)
-o	Two-way data-binding
-o	ngModel
-o	Two-way data-binding com ngModel
-o	Envio de dados para servidor
-o	Gravando nova foto na API
-o	Manipulando propriedades de uma classe
-o	Validação orientada a template
-o	Construtor de formulários
-o	Compondo validadores
-o	Estilo por componente
-o	ViewEncapsulation e seus tipos
-o	Emulação Shadow DOM
-o	Criação e utilização de um serviço
-o	Injectable
-o	Serviço como pendência
-o	Removendo dados inconsistentes
-o	Event binding
-o	Serviços de remoção
-o	Charge detection
-o	Rotas parametrizadas / parâmetros, inclusão ou alteração – imagens/fotos
-o	Modificadores de acesso e Encapsulamento
-o	TypeScript e favorecimento do encapsulamento
-o	Modificador private
-o	TypeScript e suas facilidades
-o	Modificadores de acesso de uma classe
-o	TypeScript, RxJS e testes com Jasmine/Karma
-o	Decisão nas mãos do usuário
-o	Isolando a lógica de confirmação em um componente
-o	Template de componente
-o	Eventos customizados com EventEmitter
-o	Criar botões para decisões
-o	Menu da aplicação
-o	Referência de elemento através de injeção
-o	Erros de compilação
-o	Variáveis no template
+* Construindo o alicerce da aplicação 
+*	Angular, o framework MVC da Google
+*	Angular 5
+* Instalando o Node
+* Iniciando o projeto com Angular
+* Entendendo a estrutura do projeto: o componente principal
+* Nomeando a App e imagens estáticas
+* Adicionando CSS no projeto
+* Criando componentes para as fotos
+* Parâmetros
+* Consumindo uma API
+* HTTP e injeção de dependências
+* TypeScript e definição de tipos estáticos
+* Configurando o servidor HTTP do Angular
+* Conectando com API
+* Diretiva ngFor
+* Lista de Fotos
+*	PainelComponent
+*	Página de cadastro de fotos
+*	Single Page Application (SPA)
+*	Configurando rotas
+*	Redirecionar caminhos inexistentes
+*	Links para rotas
+*	Variáveis locais
+*	Criando um pipe
+*	Interface type
+*	Implementando uma interface
+*	Definir tipos para usar autocomplete
+*	Pipe, implementando a lógica
+*	Event binding para atualizar a view
+*	Filtros
+*	Cadastrando novas imagens
+*	Data-binding
+*	One-way data-binding
+*	Associação de eventos (data-binding)
+*	Two-way data-binding
+*	ngModel
+*	Two-way data-binding com ngModel
+*	Envio de dados para servidor
+*	Gravando nova foto na API
+*	Manipulando propriedades de uma classe
+*	Validação orientada a template
+*	Construtor de formulários
+*	Compondo validadores
+*	Estilo por componente
+*	Criação e utilização de um serviço
+*	Injectable
+*	Serviço como pendência
+*	Removendo dados inconsistentes
+*	Event binding
+*	Serviços de remoção
+*	Charge detection
+*	Rotas parametrizadas / parâmetros, inclusão ou alteração – imagens/fotos
+*	Modificadores de acesso e Encapsulamento
+*	TypeScript e favorecimento do encapsulamento
+*	Modificador private
+*	TypeScript e suas facilidades
+*	Modificadores de acesso de uma classe
+*	TypeScript, RxJS e testes com Jasmine/Karma
+*	Decisão nas mãos do usuário
+*	Template de componente
+*	Eventos customizados com EventEmitter
+*	Criar botões para decisões
+*	Menu da aplicação
+*	Referência de elemento através de injeção
+*	Erros de compilação
+*	Variáveis no template
