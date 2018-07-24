@@ -4,14 +4,14 @@ Desenvolvimento Web com Spring Boot
 
 Spring
 ---
-•	Spring Boot
-•	Spring MVC
-•	Spring Data
-•	Spring Security
-•	Criando API’s REST com Spring
-•	Cache de dados com Spring
-•	Testes automatizados com Spring
-•	Build, deploy e execução do projeto
+* Spring Boot
+* Spring MVC
+* Spring Data
+* Spring Security
+* Criando API’s REST com Spring
+* Cache de dados com Spring
+* Testes automatizados com Spring
+* Build, deploy e execução do projeto
  
 Angular para WebApps RESTful
 ---
