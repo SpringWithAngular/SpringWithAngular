@@ -12,6 +12,8 @@ Spring
 * Cache de dados com Spring
 * Testes automatizados com Spring
 * Build, deploy e execução do projeto
+
+Projetos Spring https://gitlab.com/springwithangular/springProject/blob/master/README.md
  
 Angular para WebApps RESTful
 ---
