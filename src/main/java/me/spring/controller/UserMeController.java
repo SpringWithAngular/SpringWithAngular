@@ -3,6 +3,7 @@ package me.spring.controller;
 import me.spring.entity.User;
 import me.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,9 @@ import java.nio.file.Paths;
 @RestController
 @RequestMapping("/me/user")
 public class UserMeController {
+
+    @Value("${path.local}")
+    private String pathLocal;
 
     @Autowired
     UserService userService;
@@ -35,9 +39,9 @@ public class UserMeController {
     public String handleFileUpload(@RequestParam("file") MultipartFile file) {
         try {
             byte[] bytes = file.getBytes();
-            Path path = Paths.get("C:\\Users\\natan\\Pictures\\" + file.getOriginalFilename());
+            Path path = Paths.get(this.pathLocal + file.getOriginalFilename());
             Files.write(path, bytes);
-            String pathFile =  "C:\\Users\\natan\\Pictures\\" + file.getOriginalFilename();
+            String pathFile =  this.pathLocal + file.getOriginalFilename();
 //            this.fileService.uploadFile("AKIAIT34F7FGVNAKKHKA", pathFile, file.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
