@@ -38,13 +38,13 @@ public class DataInitializr implements ApplicationListener<ContextRefreshedEvent
         List<User> users = userRepository.findAll();
         if (users.isEmpty()) {
             createUser("Nataniel", "nataniel.paiva@gmail.com", passwordEncoder.encode("123"), roleAmin);
-            for(int i = 0; i < 200; i++){
-                String generatedString = this.randomAlphaNumeric(7);
-                User user = new User(generatedString,  generatedString+"@gmail.com",
-                        passwordEncoder.encode("123"), Arrays.asList(roleUser));
-                users.add(user);
-            }
-            userRepository.saveAll(users);
+//            for(int i = 0; i < 200; i++){
+//                String generatedString = this.randomAlphaNumeric(7);
+//                User user = new User(generatedString,  generatedString+"@gmail.com",
+//                        passwordEncoder.encode("123"), Arrays.asList(roleUser));
+//                users.add(user);
+//            }
+//            userRepository.saveAll(users);
         }
     }
 

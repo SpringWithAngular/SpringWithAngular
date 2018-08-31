@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.security.Principal;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/me/user")
@@ -29,5 +30,20 @@ public class UserMeController {
     public ResponseEntity<User> edit(@RequestBody User user){
         return new ResponseEntity<User>(this.userService.updateUserLogged(user), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "upload", method = RequestMethod.POST)
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+        try {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get("C:\\Users\\natan\\Pictures\\" + file.getOriginalFilename());
+            Files.write(path, bytes);
+            String pathFile =  "C:\\Users\\natan\\Pictures\\" + file.getOriginalFilename();
+//            this.fileService.uploadFile("AKIAIT34F7FGVNAKKHKA", pathFile, file.getOriginalFilename());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Upload feito";
+    }
+
 
 }

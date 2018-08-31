@@ -24,6 +24,8 @@ public class User {
     private String phone;
     private int house_number;
     private int quantity_car;
+    private String picture_url;
+    private String picture_url_original;
 
     @JsonIgnore
     private String password;
