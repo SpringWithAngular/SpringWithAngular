@@ -49,7 +49,7 @@ public class UserService {
         return userRepository.save(userUpdate);
     }
 
-    public void uploadFile(String keyName, String uploadFilePath, String fileName) {
+    public void uploadFile(String uploadFilePath, String fileName) {
 
         try {
             File file = new File(uploadFilePath);

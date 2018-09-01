@@ -22,6 +22,7 @@ public class UserMeController {
     @Value("${path.local}")
     private String pathLocal;
 
+
     @Autowired
     UserService userService;
 
@@ -42,7 +43,7 @@ public class UserMeController {
             Path path = Paths.get(this.pathLocal + file.getOriginalFilename());
             Files.write(path, bytes);
             String pathFile =  this.pathLocal + file.getOriginalFilename();
-//            this.fileService.uploadFile("AKIAIT34F7FGVNAKKHKA", pathFile, file.getOriginalFilename());
+            this.userService.uploadFile(pathFile, file.getOriginalFilename());
         } catch (IOException e) {
             e.printStackTrace();
         }
