@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/me/user")
 public class UserMeController {
@@ -34,7 +36,11 @@ public class UserMeController {
         if(!content.equals("image/png") && !content.equals("image/jpeg")){
             response = "Deu ruim";
         }else {
-            this.userService.uploadFile(file);
+            try {
+                this.userService.uploadFile(file);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
         return response;
     }

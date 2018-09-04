@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 @Service
@@ -53,10 +54,10 @@ public class UserService {
         return userRepository.save(userUpdate);
     }
 
-    public void uploadFile(MultipartFile file) {
+    public void uploadFile(MultipartFile file) throws IOException{
 
         try {
-            File fileLocal = this.multipartToFile(file);
+            File fileLocal = this.convert(file);
             BufferedImage bimg = ImageIO.read(fileLocal);
             int width          = bimg.getWidth();
             if(width > 300){
@@ -69,6 +70,7 @@ public class UserService {
                 s3client.putObject(new PutObjectRequest(this.bucket, file.getOriginalFilename(),  output));
             }else{
                 s3client.putObject(new PutObjectRequest(this.bucket, file.getOriginalFilename(),  fileLocal));
+                s3client.putObject(new PutObjectRequest(this.bucket, "original/" + file.getOriginalFilename(),  fileLocal));
             }
 
         } catch (AmazonClientException ace) {
@@ -84,6 +86,16 @@ public class UserService {
     {
         File convFile = new File( multipart.getOriginalFilename());
         multipart.transferTo(convFile);
+        return convFile;
+    }
+
+    public File convert(MultipartFile file) throws IOException
+    {
+        File convFile = new File(file.getOriginalFilename());
+        convFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
         return convFile;
     }
 
