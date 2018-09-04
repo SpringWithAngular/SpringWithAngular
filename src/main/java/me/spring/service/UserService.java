@@ -12,9 +12,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.file.Files;
+import java.io.IOException;
 
 @Service
 public class UserService {
@@ -49,16 +53,47 @@ public class UserService {
         return userRepository.save(userUpdate);
     }
 
-    public void uploadFile(String uploadFilePath, String fileName) {
+    public void uploadFile(MultipartFile file) {
 
         try {
-            File file = new File(uploadFilePath);
-            s3client.putObject(new PutObjectRequest(this.bucket, fileName,  file));
+            File fileLocal = this.multipartToFile(file);
+            BufferedImage bimg = ImageIO.read(fileLocal);
+            int width          = bimg.getWidth();
+            if(width > 300){
+                s3client.putObject(new PutObjectRequest(this.bucket, "original/" + file.getOriginalFilename(),  fileLocal));
+                BufferedImage image = ImageIO.read(fileLocal);
+                BufferedImage resized = this.resize(image, 50, 50);
+                File output = new File("image.png");
+                ImageIO.write(resized, "png", output );
+
+                s3client.putObject(new PutObjectRequest(this.bucket, file.getOriginalFilename(),  output));
+            }else{
+                s3client.putObject(new PutObjectRequest(this.bucket, file.getOriginalFilename(),  fileLocal));
+            }
 
         } catch (AmazonClientException ace) {
             logger.info("Caught an AmazonClientException: ");
             logger.info("Error Message: " + ace.getMessage());
         }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public File multipartToFile(MultipartFile multipart) throws IOException
+    {
+        File convFile = new File( multipart.getOriginalFilename());
+        multipart.transferTo(convFile);
+        return convFile;
+    }
+
+    private BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
     }
 
 
