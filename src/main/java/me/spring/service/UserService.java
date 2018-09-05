@@ -49,22 +49,23 @@ public class UserService {
         userUpdate.setName(user.getName());
         userUpdate.setPhone(user.getPhone());
         userUpdate.setEmail(user.getEmail());
-        userUpdate.setHouse_number(user.getHouse_number());
-        userUpdate.setQuantity_car(user.getQuantity_car());
+        userUpdate.setHouseNumber(user.getHouseNumber());
+        userUpdate.setQuantityCar(user.getQuantityCar());
         return userRepository.save(userUpdate);
     }
 
-    public void uploadFile(MultipartFile file) throws IOException{
-
+    public User uploadFile(MultipartFile file) throws IOException{
+        UserDetails userDetails = this.getUserLogged();
+        User user = this.userRepository.findByEmail(userDetails.getUsername());
         try {
             File fileLocal = this.convert(file);
             BufferedImage bimg = ImageIO.read(fileLocal);
             int width          = bimg.getWidth();
-            if(width > 300){
+            if(width > 100){
                 s3client.putObject(new PutObjectRequest(this.bucket, "original/" + file.getOriginalFilename(),  fileLocal));
                 BufferedImage image = ImageIO.read(fileLocal);
                 BufferedImage resized = this.resize(image, 50, 50);
-                File output = new File("image.png");
+                File output = new File("target/image.png");
                 ImageIO.write(resized, "png", output );
 
                 s3client.putObject(new PutObjectRequest(this.bucket, file.getOriginalFilename(),  output));
@@ -73,6 +74,11 @@ public class UserService {
                 s3client.putObject(new PutObjectRequest(this.bucket, "original/" + file.getOriginalFilename(),  fileLocal));
             }
 
+
+            user.setPictureUrl(this.url + file.getOriginalFilename());
+            user.setPictureUrlOriginal(this.url + "original/" + file.getOriginalFilename());
+            this.userRepository.save(user);
+
         } catch (AmazonClientException ace) {
             logger.info("Caught an AmazonClientException: ");
             logger.info("Error Message: " + ace.getMessage());
@@ -80,18 +86,12 @@ public class UserService {
         catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    public File multipartToFile(MultipartFile multipart) throws IOException
-    {
-        File convFile = new File( multipart.getOriginalFilename());
-        multipart.transferTo(convFile);
-        return convFile;
+        return user;
     }
 
     public File convert(MultipartFile file) throws IOException
     {
-        File convFile = new File(file.getOriginalFilename());
+        File convFile = new File("target/" + file.getOriginalFilename());
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());

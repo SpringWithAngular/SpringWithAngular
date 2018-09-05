@@ -22,10 +22,10 @@ public class User {
     private String name;
     private String email;
     private String phone;
-    private int house_number;
-    private int quantity_car;
-    private String picture_url;
-    private String picture_url_original;
+    private int houseNumber;
+    private int quantityCar;
+    private String pictureUrl;
+    private String pictureUrlOriginal;
 
     @JsonIgnore
     private String password;

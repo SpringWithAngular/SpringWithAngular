@@ -30,19 +30,19 @@ public class UserMeController {
     }
 
     @RequestMapping(value = "upload", method = RequestMethod.POST)
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
-        String response = "Upload feito com sucesso";
+    public ResponseEntity<User> handleFileUpload(@RequestParam("file") MultipartFile file){
+        User user = new User();
         String content = file.getContentType();
         if(!content.equals("image/png") && !content.equals("image/jpeg")){
-            response = "Deu ruim";
+            final Exception deu_ruim = new Exception("Deu ruim");
         }else {
             try {
-                this.userService.uploadFile(file);
+                user = this.userService.uploadFile(file);
             } catch (IOException e){
                 e.printStackTrace();
             }
         }
-        return response;
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
 
